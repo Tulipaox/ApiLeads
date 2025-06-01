@@ -1,0 +1,22 @@
+# Diretório de módulos do Node
+node_modules/
+
+# Arquivos gerados após compilação
+build/
+
+# Arquivos de configuração e variáveis de ambiente
+.env
+
+# Logs
+logs/
+*.log
+
+# Informações de dependências e histórico de instalação
+package-lock.json
+
+# Configuração do TypeScript
+*.tsbuildinfo
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
