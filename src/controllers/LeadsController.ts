@@ -1,6 +1,6 @@
 import { Handler } from "express";
 import { prisma } from "../database";
-import { HttpError } from "../erros/HttpError"; 
+import { HttpError } from "../erros/HttpError";
 import { Prisma } from "@prisma/client";
 import { CreateLeadRequestSchema, GetLeadsRequestSchema, UpdateLeadRequestSchema } from "./schemas/LeadsrequestSchema";
 
@@ -8,19 +8,19 @@ export class LeadsController {
     index: Handler = async (req, res, next) => {
         try {
             const query = GetLeadsRequestSchema.parse(req.query)
-            const { page= "1", pageSize = "10", name, status, sortBy = "name", order = "asc" } = query
+            const { page = "1", pageSize = "10", name, status, sortBy = "name", order = "asc" } = query
 
             const pageNumber = Number(page)
             const pageSizeNumber = Number(pageSize)
 
             const where: Prisma.LeadWhereInput = {}
 
-            if(name) where.name = { contains: name, mode: "insensitive" }
-            if(status) where.status = status
+            if (name) where.name = { contains: name, mode: "insensitive" }
+            if (status) where.status = status
 
             const leads = await prisma.lead.findMany({
                 where,
-                skip: (pageNumber -1) * pageSizeNumber,
+                skip: (pageNumber - 1) * pageSizeNumber,
                 take: pageSizeNumber,
                 orderBy: { [sortBy]: order } // exm: orderBy: "name": order: "asc"
             })

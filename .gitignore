@@ -1,7 +1,11 @@
 # Diretório de módulos do Node
 node_modules/
 
-# Arquivos gerados após compilação
+# Ignorar arquivos JavaScript compilados
+*.js
+*.js.map
+
+# Ignorar a pasta de build
 build/
 
 # Arquivos de configuração e variáveis de ambiente
@@ -20,3 +24,6 @@ package-lock.json
 # Arquivos do sistema operacional
 .DS_Store
 Thumbs.db
+# Ignorar arquivos gerados pelo Prisma
+generated/
+prisma/generated/
