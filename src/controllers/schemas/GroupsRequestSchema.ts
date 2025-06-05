@@ -9,4 +9,9 @@ export const CreateGroupRequestSchema = z.object({
 export const UpdateGroupRequestSchema = z.object({
     name: z.string().optional(),
     description: z.string().optional()
+
+})
+
+export const  AddLeadRequestSchema = z.object({
+    leadId: z.number()
 })
