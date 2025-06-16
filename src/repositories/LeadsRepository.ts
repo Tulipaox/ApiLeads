@@ -8,7 +8,9 @@ export interface LeadWhereParams {
     equals?: string
     mode?: "default" | "insensitive"
    } 
-   status?: LeadStatus
+   status?: LeadStatus,
+   groupId?: number,
+   campaignsId?: number
 }
 
 export interface FindLeadsParams {
@@ -16,7 +18,11 @@ export interface FindLeadsParams {
     sortBy?: "name"  | "status" | "createdAt"
     order?: "asc" | "desc"
     limit?: number
-    offset?: number
+    offset?: number,
+    include?: {
+        groups?: boolean
+        campaigns?: boolean
+    }
 }
 
 export interface CreateLeadAttributes {
@@ -33,4 +39,5 @@ export interface LeadsRepository {
     create: (attributes: CreateLeadAttributes) => Promise<Lead> 
     updateById: (id: number, attributes: Partial<CreateLeadAttributes>) => Promise<Lead | null>
     deleteById: (id: number) => Promise<Lead | null>
+
 }

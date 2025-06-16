@@ -25,16 +25,6 @@ export class LeadsController {
 
             const leads = await this.leadsRepository.find({ where, sortBy, order, limit, offset })
             const total = await this.leadsRepository.count( where )
-
-            // const leads = await prisma.lead.findMany({
-            //     where,
-            //     skip: (pageNumber - 1) * pageSizeNumber,
-            //     take: pageSizeNumber,
-            //     orderBy: { [sortBy]: order } // exm: orderBy: "name": order: "asc"
-            // })
-
-            // const total = await prisma.lead.count({ where })
-
             res.json({
                 data: leads,
                 meta: {
@@ -54,9 +44,6 @@ export class LeadsController {
             const body = CreateLeadRequestSchema.parse(req.body)
             if(!body.status) body.status = "New"
             const newLead = await this.leadsRepository.create(body)
-            // const newLead = await prisma.lead.create({
-            //     data: body
-            // })
             res.status(201).json(newLead)
         } catch (error) {
             next(error)
@@ -66,14 +53,6 @@ export class LeadsController {
     show: Handler = async (req, res, next) => {
         try {
             const lead = await this.leadsRepository.findById(+req.params.id)
-            // const lead = await prisma.lead.findUnique({
-            //     where: { id: +req.params.id },
-            //     include: {
-            //         group: true,
-            //         campaigns: true
-            //     }
-            // })
-
             if (!lead) throw new HttpError(404, "lead not found!")
 
             res.json(lead)
@@ -86,11 +65,9 @@ export class LeadsController {
         try {
             const id = +req.params.id
             const body = UpdateLeadRequestSchema.parse(req.body)
-            // const leadExist = await prisma.lead.findUnique({ where: { id } })
             const leadExist = await this.leadsRepository.findById(id)
 
             if (!leadExist) throw new HttpError(404, "lead not found!")
-
             if(leadExist.status === "New" && body.status !== undefined && body.status !== "Contacted"){
                 throw new HttpError(400, "A new lead must be contacted before their status is updated ")
             }    
@@ -103,10 +80,6 @@ export class LeadsController {
             }
 
             const updateLead = await this.leadsRepository.updateById(id, body)
-            // const updateLead = await prisma.lead.update({
-            //     data: body,
-            //     where: { id }
-            // })
             res.json(updateLead)
         } catch (error) {
             next(error)
@@ -119,9 +92,6 @@ export class LeadsController {
             if (!leadExist) throw new HttpError(404, "lead not found!")
             
             const deleteLead = await this.leadsRepository.deleteById(+req.params.id)   
-            // const deleteLead = await prisma.lead.delete({
-            //     where: { id: +req.params.id }
-            // })
             res.json({ message: "lead deleted successfully", deleteLead });
         } catch (error) {
             next(error)

@@ -30,7 +30,7 @@ router.delete("/campaigns/:campaignId/leads/:leadId", campaignsLeadsController.d
 
 router.get("/groups/:groupId/leads")
 router.post("/groups/:groupId/leads")
-router.delete("/groups/:groupId/leads/:leadID")
+router.delete("/groups/:groupId/leads/:leadId")
 
 router.get("/status", async (req, res, next) => {
     try {
