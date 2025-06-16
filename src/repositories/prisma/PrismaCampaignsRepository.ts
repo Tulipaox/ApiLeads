@@ -7,10 +7,14 @@ export class PrismaCampaignseRepository implements CampaignsRepository {
         return prisma.campaign.findMany()
     }
     findById(id: number): Promise<Campaign | null> {
-        return prisma.campaign.findUnique({ 
+        return prisma.campaign.findUnique({
             where: { id },
-            include:{
-                leads: true
+            include: {
+                leads: {
+                    include: {
+                        lead: true
+                    }
+                }
             }
         })
     }
