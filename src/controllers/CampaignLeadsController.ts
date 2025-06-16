@@ -1,7 +1,5 @@
 import { Handler } from "express";
-import { Prisma } from "@prisma/client";
 import { AddLeadRequesSchema, GetCampaignLeadsRequestSchema, UpdateLeadRequestSchema } from "./schemas/CampaingsRequestSchema";
-import { prisma } from "../database";
 import { CampaignLeadsRepository } from "../repositories/CampaignLeadsRepository";
 import { LeadsRepository, LeadWhereParams } from "../repositories/LeadsRepository";
 
