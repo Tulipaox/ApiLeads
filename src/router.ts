@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { campaignsController, campaignsLeadsController, groupsController, leadsController } from "./container";
+import { campaignsController, campaignsLeadsController, groupsController, groupsLeadsController, leadsController } from "./container";
 
 const router = Router()
 
@@ -28,9 +28,9 @@ router.post("/campaigns/:campaignId/leads", campaignsLeadsController.addLead)
 router.put("/campaigns/:campaignId/leads/:leadId", campaignsLeadsController.updateLeadStatus)
 router.delete("/campaigns/:campaignId/leads/:leadId", campaignsLeadsController.deleteLead)
 
-router.get("/groups/:groupId/leads")
-router.post("/groups/:groupId/leads")
-router.delete("/groups/:groupId/leads/:leadId")
+router.get("/groups/:groupId/leads", groupsLeadsController.getLeads)
+router.post("/groups/:groupId/leads", groupsLeadsController.addLead)
+router.delete("/groups/:groupId/leads/:leadId", groupsLeadsController.removeLead)
 
 router.get("/status", async (req, res, next) => {
     try {

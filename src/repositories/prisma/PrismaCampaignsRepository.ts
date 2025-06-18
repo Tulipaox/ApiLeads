@@ -21,14 +21,17 @@ export class PrismaCampaignseRepository implements CampaignsRepository {
     create(attributes: CreateCampaignsAttributes): Promise<Campaign> {
         return prisma.campaign.create({ data: attributes })
     }
-    updateById(id: number, attributes: Partial<CreateCampaignsAttributes>): Promise<Campaign | null> {
+    async updateById(id: number, attributes: Partial<CreateCampaignsAttributes>): Promise<Campaign | null> {
+        const campaignExists = await prisma.campaign.findUnique({where: { id }})
+        if(!campaignExists) return null
         return prisma.campaign.update({
             data: attributes,
             where: { id }
         })
     }
-    deleteById(id: number): Promise<Campaign | null> {
+    async deleteById(id: number): Promise<Campaign | null> {
+        const campaignExists = await prisma.campaign.findUnique({where: { id }})
+        if(!campaignExists) return null
         return prisma.campaign.delete({ where: { id } })
     }
-
 }

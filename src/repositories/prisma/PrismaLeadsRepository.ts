@@ -16,11 +16,6 @@ export class PrismaLeadsRepository implements LeadsRepository {
                     some: {
                         id: params.where?.groupId
                     }
-                },
-                campaigns: {
-                    some: {
-                        campaignId: params.where?.campaignsId
-                    }
                 }
             },
             orderBy: { [params.sortBy ?? "name"]: params.order },
@@ -35,7 +30,7 @@ export class PrismaLeadsRepository implements LeadsRepository {
 
     async findById(id: number): Promise<Lead | null> {
         return prisma.lead.findUnique({
-           where: {id},
+           where: { id },
            include: {
             campaigns: true,
             group: true
