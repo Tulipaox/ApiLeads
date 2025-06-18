@@ -1,6 +1,6 @@
 import { Handler } from "express";
 import { CreateLeadRequestSchema, GetLeadsRequestSchema, UpdateLeadRequestSchema } from "./schemas/LeadsrequestSchema";
-import { LeadsService } from "../services/LEadsService";
+import { LeadsService } from "../services/LeadsService";
 
 export class LeadsController {
     constructor(private readonly leadsService: LeadsService) { }
