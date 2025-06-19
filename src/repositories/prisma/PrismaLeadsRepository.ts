@@ -3,6 +3,7 @@ import { CreateLeadAttributes, FindLeadsParams, LeadsRepository, LeadWhereParams
 import { prisma } from "../../database";
 
 export class PrismaLeadsRepository implements LeadsRepository {
+
     async find(params: FindLeadsParams): Promise<Lead[]> {
         return prisma.lead.findMany({
             where: {
@@ -14,15 +15,25 @@ export class PrismaLeadsRepository implements LeadsRepository {
                 status: params.where?.status,
                 group:{
                     some: {
-                        id: params.where?.groupId
+                        leads:{
+                            some: {
+                                id: params.where?.groupId
+                            }
+                        }
+                    }
+                },
+                campaigns:{
+                    some: {
+                        campaignId: params.where?.campaignsId
                     }
                 }
+
             },
             orderBy: { [params.sortBy ?? "name"]: params.order },
             skip: params.offset,
             take: params.limit,
             include: {
-                group: params.include?.groups,
+                group: params.include?.group,
                 campaigns: params.include?.campaigns
             }
         })

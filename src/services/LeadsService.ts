@@ -2,7 +2,7 @@ import { LeadStatus } from "@prisma/client"
 import { CreateLeadAttributes, LeadsRepository, LeadWhereParams } from "../repositories/LeadsRepository"
 import { HttpError } from "../erros/HttpError"
 
-interface GetLeadsWithPaginationParams {
+export interface GetLeadsWithPaginationParams {
     page?: number,
     pageSize?: number,
     name?: string,

@@ -20,7 +20,7 @@ export interface FindLeadsParams {
     limit?: number
     offset?: number,
     include?: {
-        groups?: boolean
+        group?: boolean
         campaigns?: boolean
     }
 }
