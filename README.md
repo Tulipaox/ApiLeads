@@ -107,9 +107,6 @@ A arquitetura segue o padrão MVC (Model-View-Controller) com o uso de repositó
 2. **Instale as dependências:**  
    ```bash
     npm install
-2. **Instale as dependências:**  
-   ```bash
-    npm install
 3. **Configure o arquivo .env:**  
    ```bash
    DATABASE_URL="postgresql://usuario:senha@localhost:5432/nome_banco" 
